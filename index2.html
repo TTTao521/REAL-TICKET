@@ -1,0 +1,44 @@
+// API 封装示例
+const API_BASE = 'http://你的服务器IP:3000/api';
+
+// 1. 发送验证码
+async function sendCode(phone) {
+    const res = await fetch(`${API_BASE}/send-code`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone })
+    });
+    return res.json();
+}
+
+// 2. 登录
+async function login(phone, code) {
+    const res = await fetch(`${API_BASE}/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone, code })
+    });
+    return res.json();
+}
+
+// 3. 查询剩余名额
+async function getRemain() {
+    const res = await fetch(`${API_BASE}/remain`);
+    return res.json();
+}
+
+// 4. 抢票（核心）
+async function bookTicket(userId) {
+    const res = await fetch(`${API_BASE}/book`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId, ticketId: 1 })
+    });
+    return res.json();
+}
+
+// 5. 我的订单
+async function getMyOrders(userId) {
+    const res = await fetch(`${API_BASE}/my-orders?userId=${userId}`);
+    return res.json();
+}
